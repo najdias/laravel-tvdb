@@ -7,12 +7,9 @@ name: Psalm Security Scan
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
-  schedule:
-    - cron: '34 17 * * 0'
+    paths:
+      - '**.php'
+      - '.github/workflows/psalm.yml'
 
 permissions:
   contents: read
