@@ -4,7 +4,6 @@ namespace Days85\Tvdb;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Days85\Tvdb\Commands\TvdbCommand;
 
 class TvdbServiceProvider extends PackageServiceProvider
 {
