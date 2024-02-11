@@ -11,4 +11,7 @@ parameters:
     checkOctaneCompatibility: true
     checkModelProperties: true
     checkMissingIterableValueType: false
+    ignoreErrors:
+            - message: 'Undefined variable: $this'
+              path: 'tests/*'
 

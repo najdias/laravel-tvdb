@@ -16,7 +16,7 @@
     backupStaticProperties="false"
 >
     <testsuites>
-        <testsuite name="Days85 Test Suite">
+        <testsuite name="Laravel tvdb Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

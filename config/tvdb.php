@@ -1,6 +1,6 @@
 <?php
 
-// config for Days85/Tvdb
 return [
-
+    'apikey' => env('TVDB_APIKEY', ''),
+    'pin' => env('TVDB_PIN', ''),
 ];
