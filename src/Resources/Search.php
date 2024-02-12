@@ -9,7 +9,7 @@ use InvalidArgumentException;
 
 class Search extends AbstractResource
 {
-    const array VALID_OPTIONAL_PARAMETERS = [
+    protected const VALID_OPTIONAL_PARAMETERS = [
         "type",
         "year",
         "offset",

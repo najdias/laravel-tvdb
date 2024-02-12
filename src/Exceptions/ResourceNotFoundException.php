@@ -8,9 +8,9 @@ use GuzzleHttp\Psr7\Query;
 
 class ResourceNotFoundException extends Exception
 {
-    const string NOT_FOUND_MESSAGE = 'Could not find the requested resource!';
-    const string NO_TRANSLATION_MESSAGE = 'There is no translation available for the requested language!';
-    const string PATH_MESSAGE = ' Requested path: %s [parameters: %s]';
+    public const NOT_FOUND_MESSAGE = 'Could not find the requested resource!';
+    public const NO_TRANSLATION_MESSAGE = 'There is no translation available for the requested language!';
+    public const PATH_MESSAGE = ' Requested path: %s [parameters: %s]';
 
     public static function createErrorMessage(string $baseMessage, string $path = null, array $parameters = []): string
     {

@@ -7,9 +7,9 @@ use Exception;
 
 class ParseException extends Exception
 {
-    const string DECODE_MESSAGE = 'Could not decode JSON data';
-    const string HEADER_MESSAGE = 'Could not find %s in the provided headers';
-    const string MODIFIED_MESSAGE = 'Could not convert %s into a DateTime object';
+    public const DECODE_MESSAGE = 'Could not decode JSON data';
+    public const HEADER_MESSAGE = 'Could not find %s in the provided headers';
+    public const MODIFIED_MESSAGE = 'Could not convert %s into a DateTime object';
 
     public static function decode(): ParseException
     {
