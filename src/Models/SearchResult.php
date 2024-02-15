@@ -16,28 +16,51 @@ class SearchResult
     public string $companyType;
     public string $country;
     public string $director;
-    public string $extendedTitle;
+    public string $extended_title;
+    public ?string $first_air_time;
     /**
      * @var string[]
-     */
+    */
     public array $genres;
     public string $id;
-    public string $imageUrl;
+    public string $image_url;
     public string $name;
+    public bool $is_official;
     public string $name_translated;
+    public string $network;
+    public string $objectID;
     public string $officialList;
     public string $overview;
+    /**
+     * @var array<string, string>
+     */
+    public array $overviews;
     /**
      * @var string[]
      */
     public array $overview_translated;
+    public string $poster;
     /**
      * @var string[]
      */
     public array $posters;
-    public string $primaryLanguage;
-    public string $primaryType;
+    public string $primary_language;
+    /**
+     * @var RemoteId[]
+     */
+    public array $remote_ids;
     public string $status;
+    public string $slug;
+    /**
+     * @var string[]|null
+     */
+    public ?array $studios;
+    public string $title;
+    public string $thumbnail;
+    /**
+     * @var array<string, string>
+     */
+    public array $translations;
     /**
      * @var string[]
      */
@@ -45,30 +68,6 @@ class SearchResult
     public string $tvdb_id;
     public string $type;
     public string $year;
-    public string $thumbnail;
-    public string $poster;
-    /**
-     * @var array
-     */
-    public array $translations;
-    public bool $is_official;
-    /**
-     * @var RemoteId[]
-     */
-    public array $remote_ids;
-    public string $network;
-    public string $title;
-    /**
-     * @var array
-     */
-    public array $overviews;
-    public ?string $first_air_time;
-    public string $objectID;
-    public string $slug;
-    /**
-     * @var string[]|null
-     */
-    public ?array $studios;
 
     public function getLocalizedName(string $lang) : string
     {

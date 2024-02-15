@@ -17,7 +17,7 @@ use GuzzleHttp\Psr7\Response;
 
 class ApiClient implements ApiClientInterface
 {
-    protected const API_BASE_URI = 'https://api4.thetvdb.com/v4/';
+    protected const string API_BASE_URI = 'https://api4.thetvdb.com/v4/';
 
     private ?string $token = null;
     private ?Links $links = null;

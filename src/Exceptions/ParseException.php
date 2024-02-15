@@ -7,9 +7,9 @@ use Exception;
 
 class ParseException extends Exception
 {
-    public const DECODE_MESSAGE = 'Could not decode JSON data';
-    public const HEADER_MESSAGE = 'Could not find %s in the provided headers';
-    public const MODIFIED_MESSAGE = 'Could not convert %s into a DateTime object';
+    public const string DECODE_MESSAGE = 'Could not decode JSON data';
+    public const string HEADER_MESSAGE = 'Could not find %s in the provided headers';
+    public const string MODIFIED_MESSAGE = 'Could not convert %s into a DateTime object';
 
     public static function decode(): ParseException
     {
@@ -25,6 +25,4 @@ class ParseException extends Exception
     {
         return new ParseException(sprintf(static::MODIFIED_MESSAGE, $suppliedTimestamp));
     }
-
-
 }

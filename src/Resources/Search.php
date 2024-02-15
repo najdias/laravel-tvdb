@@ -9,10 +9,12 @@ use InvalidArgumentException;
 
 class Search extends AbstractResource
 {
-    protected const VALID_OPTIONAL_PARAMETERS = [
+    /**
+     * @var string[]
+     */
+    protected const array VALID_OPTIONAL_PARAMETERS = [
         "type",
         "year",
-        "offset",
         "company",
         "country",
         "director",
@@ -20,6 +22,7 @@ class Search extends AbstractResource
         "primaryType",
         "network",
         "remote_id",
+        "offset",
         "limit",
     ];
 
