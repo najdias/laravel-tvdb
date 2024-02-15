@@ -23,37 +23,26 @@ You can install the package via composer:
 composer require days85/laravel-tvdb
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-tvdb-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-tvdb-config"
+php artisan vendor:publish --tag="tvdb-config"
 ```
 
 This is the contents of the published config file:
 
 ```php
 return [
+    'apikey' => env('TVDB_APIKEY', ''),
+    'pin' => env('TVDB_PIN', ''),
 ];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-tvdb-views"
 ```
 
 ## Usage
 
 ```php
-$tvdb = new Days85\Tvdb();
-echo $tvdb->echoPhrase('Hello, Days85!');
+//get series by search query
+$results = Tvdb::search('SeriesName');
 ```
 
 ## Testing
