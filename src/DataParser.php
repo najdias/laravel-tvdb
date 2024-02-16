@@ -16,31 +16,34 @@ class DataParser
 {
     private static ?Serializer $serializer = null;
 
-    public static function parseData(array $json, string $returnClass)
+    public static function parseData(array $jsonData, string $className)
     {
-        return static::getSerializer()->denormalize($json, $returnClass);
+        return self::getSerializer()->denormalize($jsonData, $className);
     }
 
-    public static function parseDataArray($json, string $returnClass): array
+    public static function parseDataArray(array $jsonData, string $className): array
     {
-        $result = [];
-        if (is_array($json)) {
-            foreach ($json as $entry) {
-                $result[] = static::parseData($entry, $returnClass);
+        $parsedData = [];
+
+        if (!empty($jsonData)) {
+            foreach ($jsonData as $entry) {
+                $parsedData[] = static::parseData($entry, $className);
             }
         }
-        return $result;
+
+        return $parsedData;
     }
 
     private static function getSerializer(): Serializer
     {
-        if (static::$serializer === null) {
-            $extractor          = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
-            static::$serializer = new Serializer(
+        if (self::$serializer === null) {
+            $extractor = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
+            self::$serializer = new Serializer(
                 [new ArrayDenormalizer(), new DateTimeNormalizer(), new ObjectNormalizer(null, null, null, $extractor)],
                 [new JsonEncoder()]
             );
         }
-        return static::$serializer;
+
+        return self::$serializer;
     }
 }

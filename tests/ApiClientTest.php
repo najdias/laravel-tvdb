@@ -13,16 +13,6 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
-//beforeEach(function () {
-//    config()->set('tvdb.username', 'username');
-//    config()->set('tvdb.userkey', 'userkey');
-//    config()->set('tvdb.apikey', 'apikey');
-//
-//    $httpClientMock = Mockery::mock(Client::class);
-//
-//    $this->apiClient = new Days85\Tvdb\ApiClient($httpClientMock);
-//});
-
 function createClientWithMockHandler(array $queue): Client
 {
     $mock = new MockHandler($queue);

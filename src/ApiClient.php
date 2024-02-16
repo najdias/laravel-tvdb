@@ -43,6 +43,11 @@ class ApiClient implements ApiClientInterface
         $this->token = $token;
     }
 
+    public function getLinks(): ?Links
+    {
+        return $this->links;
+    }
+
     public function authentication(): Authentication
     {
         return ResourceFactory::getResourceInstance($this, Authentication::class);
