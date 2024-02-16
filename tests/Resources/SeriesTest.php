@@ -1,6 +1,5 @@
 <?php
 
-use Days85\Tvdb\Models\SeriesBaseRecord;
 use Days85\Tvdb\Resources\Series;
 
 it('gets simple series', function () {
@@ -18,7 +17,7 @@ it('gets simple series', function () {
         ->once()
         ->with(
             'get',
-            'series/' . $seriesId,
+            'series/'.$seriesId,
         )
         ->andReturn($return)
         ->getMock();

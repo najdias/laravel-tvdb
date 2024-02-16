@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Days85\Tvdb;
 
@@ -25,7 +26,7 @@ class DataParser
     {
         $parsedData = [];
 
-        if (!empty($jsonData)) {
+        if (! empty($jsonData)) {
             foreach ($jsonData as $entry) {
                 $parsedData[] = static::parseData($entry, $className);
             }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Days85\Tvdb;
@@ -20,17 +21,19 @@ class ApiClient implements ApiClientInterface
     protected const string API_BASE_URI = 'https://api4.thetvdb.com/v4/';
 
     private ?string $token = null;
+
     private ?Links $links = null;
+
     private Client $httpClient;
 
-    public function __construct(Client $client = null)
+    public function __construct(?Client $client = null)
     {
         if ($client === null) {
             $this->httpClient = new Client(
                 [
                     'base_uri' => static::API_BASE_URI,
-                    'verify'   => false,
-                    'headers'  => ['accept' => 'application/json'],
+                    'verify' => false,
+                    'headers' => ['accept' => 'application/json'],
                 ]
             );
         } else {
@@ -38,7 +41,7 @@ class ApiClient implements ApiClientInterface
         }
     }
 
-    public function setToken(string $token = null): void
+    public function setToken(?string $token = null): void
     {
         $this->token = $token;
     }
@@ -84,7 +87,7 @@ class ApiClient implements ApiClientInterface
     private function getDefaultHttpClientOptions(array $options = []): array
     {
         $headers = [
-            'Accept'       => 'application/json',
+            'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
 
@@ -134,6 +137,7 @@ class ApiClient implements ApiClientInterface
             if (array_key_exists('data', $json) === false) {
                 return $json;
             }
+
             return $json['data'];
         }
 

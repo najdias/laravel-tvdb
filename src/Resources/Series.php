@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Days85\Tvdb\Resources;
 
@@ -11,7 +12,8 @@ class Series extends AbstractResource
     public function simple(int $id): SeriesBaseRecord
     {
         $json = $this->parent
-            ->performAPICallWithJsonResponse('get', 'series/' . $id);
+            ->performAPICallWithJsonResponse('get', 'series/'.$id);
+
         return DataParser::parseData($json, SeriesBaseRecord::class);
     }
 }

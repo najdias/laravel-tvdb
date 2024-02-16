@@ -25,10 +25,10 @@ function setApiClientMockSearchData(
 it('searches by name', function () {
     $name = 'foo';
     $return = [
-        ['id' => "1", 'name' => 'foo', 'tvdb_id' => 'tt123'],
-        ['id' => "2", 'name' => 'bar', 'tvdb_id' => 'tt456'],
+        ['id' => '1', 'name' => 'foo', 'tvdb_id' => 'tt123'],
+        ['id' => '2', 'name' => 'bar', 'tvdb_id' => 'tt456'],
     ];
-    $options = ['query' => ["query" => $name]];
+    $options = ['query' => ['query' => $name]];
 
     $clientMock = setApiClientMockSearchData($return, $options);
 

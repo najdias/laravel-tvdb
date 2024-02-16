@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Days85\Tvdb\Resources;
@@ -13,17 +14,17 @@ class Search extends AbstractResource
      * @var string[]
      */
     protected const array VALID_OPTIONAL_PARAMETERS = [
-        "type",
-        "year",
-        "company",
-        "country",
-        "director",
-        "language",
-        "primaryType",
-        "network",
-        "remote_id",
-        "offset",
-        "limit",
+        'type',
+        'year',
+        'company',
+        'country',
+        'director',
+        'language',
+        'primaryType',
+        'network',
+        'remote_id',
+        'offset',
+        'limit',
     ];
 
     public static function isValidOptionalParameter(string $key): bool
@@ -39,13 +40,14 @@ class Search extends AbstractResource
         $options = ['query' => []];
         foreach ($optionalParameters as $key => $value) {
             if (static::isValidOptionalParameter($key) === false) {
-                throw new InvalidArgumentException($key." is not a valid search argument!");
+                throw new InvalidArgumentException($key.' is not a valid search argument!');
             }
             $options['query'][$key] = $value;
         }
-        $options['query']["query"] = $searchQuery;
+        $options['query']['query'] = $searchQuery;
 
         $json = $this->parent->performAPICallWithJsonResponse('get', 'search', $options);
+
         return DataParser::parseDataArray($json, SearchResult::class);
     }
 }

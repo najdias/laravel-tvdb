@@ -16,6 +16,7 @@ use GuzzleHttp\Psr7\Response;
 function createClientWithMockHandler(array $queue): Client
 {
     $mock = new MockHandler($queue);
+
     return new Client(['handler' => HandlerStack::create($mock)]);
 }
 
@@ -23,15 +24,15 @@ function createTokenErrorClient(): Client
 {
     return createClientWithMockHandler([
         new Response(401, ['Content-Length' => 0]),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
 }
 
-function createPathErrorClient() : Client
+function createPathErrorClient(): Client
 {
     return createClientWithMockHandler([
         new Response(404, ['Content-Length' => 0]),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
 }
 
@@ -76,7 +77,7 @@ test('request headers path error', function () {
 test('api call json error', function () {
     $client = createClientWithMockHandler([
         new Response(201, []),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
     $testInstance = new ApiClient($client);
 
@@ -85,27 +86,27 @@ test('api call json error', function () {
 });
 
 test('api call invalid json', function () {
-    $input = "ABC";
+    $input = 'ABC';
     $client = createClientWithMockHandler([
         new Response(200, [], $input),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
     $testInstance = new ApiClient($client);
 
     $this->expectException(ParseException::class);
-    $testInstance->performAPICallWithJsonResponse("GET", "/");
+    $testInstance->performAPICallWithJsonResponse('GET', '/');
 });
 
 test('api call with invalid formed response', function () {
     $input = "{'a:'hello'}";
     $client = createClientWithMockHandler([
         new Response(200, [], $input),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
     $testInstance = new ApiClient($client);
 
     $this->expectException(ParseException::class);
-    $testInstance->performAPICallWithJsonResponse("GET", "/");
+    $testInstance->performAPICallWithJsonResponse('GET', '/');
 });
 
 test('api call with errors', function () {
@@ -114,16 +115,16 @@ test('api call with errors', function () {
         'errors' => [
             'invalidLanguage' => 'not found',
             'invalidQueryParams' => 'invalid param a',
-            'invalidFilters' => 'invalid filter b'
-        ]
+            'invalidFilters' => 'invalid filter b',
+        ],
     ];
     $client = createClientWithMockHandler([
         new Response(200, [], json_encode($expected)),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
     $testInstance = new ApiClient($client);
 
-    $result = $testInstance->performAPICallWithJsonResponse("GET", "/");
+    $result = $testInstance->performAPICallWithJsonResponse('GET', '/');
     $this->assertEquals($expected, $result);
 });
 
@@ -132,11 +133,11 @@ test('api call returning json', function () {
 
     $client = createClientWithMockHandler([
         new Response(200, [], json_encode($expected)),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
     $testInstance = new ApiClient($client);
 
-    $result = $testInstance->performAPICallWithJsonResponse("GET", "/");
+    $result = $testInstance->performAPICallWithJsonResponse('GET', '/');
     $this->assertEquals($expected, $result);
 });
 
@@ -144,10 +145,10 @@ test('api call return data json', function () {
     $expected = ['foo' => 'bar', 'data' => ['barfoo' => 'foobar']];
     $client = createClientWithMockHandler([
         new Response(200, [], json_encode($expected)),
-        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        new RequestException('Error Communicating with Server', new Request('GET', 'test')),
     ]);
     $testInstance = new ApiClient($client);
 
-    $result = $testInstance->performAPICallWithJsonResponse("GET", "/");
+    $result = $testInstance->performAPICallWithJsonResponse('GET', '/');
     $this->assertEquals($expected['data'], $result);
 });
