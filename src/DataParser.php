@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Days85\Tvdb;
 
@@ -29,18 +30,20 @@ class DataParser
                 $result[] = static::parseData($entry, $returnClass);
             }
         }
+
         return $result;
     }
 
     private static function getSerializer(): Serializer
     {
         if (static::$serializer === null) {
-            $extractor          = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
+            $extractor = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
             static::$serializer = new Serializer(
                 [new ArrayDenormalizer(), new DateTimeNormalizer(), new ObjectNormalizer(null, null, null, $extractor)],
                 [new JsonEncoder()]
             );
         }
+
         return static::$serializer;
     }
 }

@@ -6,17 +6,17 @@ use Days85\Tvdb\Exceptions\UnauthorizedException;
 use GuzzleHttp\Psr7\Query;
 
 it('creates error message', function () {
-    $base       = "Error.";
-    $path       = "foo/bar/baz";
+    $base = 'Error.';
+    $path = 'foo/bar/baz';
     $parameters = ['foo' => 'bar', 'baz'];
     $this->assertEquals($base, ResourceNotFoundException::createErrorMessage($base));
     $expectedError = $base.sprintf(ResourceNotFoundException::PATH_MESSAGE, $path, '');
     $this->assertEquals($expectedError, ResourceNotFoundException::createErrorMessage($base, $path));
     $expectedError = $base.sprintf(
-            ResourceNotFoundException::PATH_MESSAGE,
-            $path,
-            Query::build($parameters)
-        );
+        ResourceNotFoundException::PATH_MESSAGE,
+        $path,
+        Query::build($parameters)
+    );
     $this->assertEquals($expectedError, ResourceNotFoundException::createErrorMessage($base, $path, $parameters));
 });
 
@@ -41,7 +41,7 @@ it('throws not found exception', function () {
 });
 
 it('throws not found exception with query', function () {
-    $path    = "some/long/path";
+    $path = 'some/long/path';
     $options = ['query' => ['foobar']];
     $this->expectException(ResourceNotFoundException::class);
     $this->expectExceptionMessage(
@@ -63,7 +63,7 @@ it('throws no translation exception', function () {
 });
 
 it('throws no translation exception with query', function () {
-    $path    = "some/long/path";
+    $path = 'some/long/path';
     $options = ['query' => ['foobar']];
     $this->expectException(ResourceNotFoundException::class);
     $this->expectExceptionMessage(

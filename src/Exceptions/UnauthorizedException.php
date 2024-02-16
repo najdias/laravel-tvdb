@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Days85\Tvdb\Exceptions;
 
@@ -8,6 +9,7 @@ use Exception;
 final class UnauthorizedException extends Exception
 {
     public const string CREDENTIALS_MESSAGE = 'Unauthorized; please provide valid credentials.';
+
     public const string TOKEN_MESSAGE = 'Unauthorized; please provide valid token.';
 
     public static function invalidCredentials(): UnauthorizedException

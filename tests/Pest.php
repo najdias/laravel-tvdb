@@ -2,7 +2,6 @@
 
 use Days85\Tvdb\ApiClient;
 use Days85\Tvdb\Tests\TestCase;
-use Days85\Tvdb\Tvdb;
 use Mockery\LegacyMockInterface;
 use Mockery\MockInterface;
 
@@ -18,9 +17,9 @@ function mockApiClient(): MockInterface|LegacyMockInterface|ApiClient
 function setApiClientMockLoginData(
     ?string $apiKey = 'FOO',
     ?string $expectedToken = 'bar',
-    MockInterface|LegacyMockInterface|ApiClient $apiClientMock = null,
+    MockInterface|LegacyMockInterface|ApiClient|null $apiClientMock = null,
 ): MockInterface|LegacyMockInterface|ApiClient {
-    if (!$apiClientMock) {
+    if (! $apiClientMock) {
         $apiClientMock = mockApiClient();
     }
 

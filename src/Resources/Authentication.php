@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Days85\Tvdb\Resources;
@@ -10,11 +11,11 @@ class Authentication extends AbstractResource
 {
     public function login(): ApiClientInterface
     {
-        $apikey	= config('tvdb.apikey');
+        $apikey = config('tvdb.apikey');
         $pin = config('tvdb.pin');
 
         $arguments = ['apikey' => $apikey];
-        if (!empty($pin)) {
+        if (! empty($pin)) {
             $arguments['pin'] = $pin;
         }
 
@@ -23,11 +24,11 @@ class Authentication extends AbstractResource
             'login',
             [
                 'body' => json_encode($arguments),
-                'http_errors' => true
+                'http_errors' => true,
             ]
         );
 
-        if (!array_key_exists('token', $data)) {
+        if (! array_key_exists('token', $data)) {
             throw UnauthorizedException::invalidCredentials();
         }
 
