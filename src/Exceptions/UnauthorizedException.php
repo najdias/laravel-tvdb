@@ -8,9 +8,15 @@ use Exception;
 
 final class UnauthorizedException extends Exception
 {
-    public const string CREDENTIALS_MESSAGE = 'Unauthorized; please provide valid credentials.';
+    /**
+     * @var string
+     */
+    public const CREDENTIALS_MESSAGE = 'Unauthorized; please provide valid credentials.';
 
-    public const string TOKEN_MESSAGE = 'Unauthorized; please provide valid token.';
+    /**
+     * @var string
+     */
+    public const TOKEN_MESSAGE = 'Unauthorized; please provide valid token.';
 
     public static function invalidCredentials(): UnauthorizedException
     {

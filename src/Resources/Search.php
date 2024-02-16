@@ -13,7 +13,7 @@ class Search extends AbstractResource
     /**
      * @var string[]
      */
-    protected const array VALID_OPTIONAL_PARAMETERS = [
+    protected const VALID_OPTIONAL_PARAMETERS = [
         'type',
         'year',
         'company',
