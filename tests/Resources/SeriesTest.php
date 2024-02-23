@@ -115,3 +115,25 @@ it('throws exception with wrong season type on get episodes', function () {
 
     $this->assertIsArray($episodes);
 })->expectException(InvalidArgumentException::class);
+
+it('gets extended series', function () {
+    $seriesId = 1337;
+    $json = file_get_contents(__DIR__.'/../Data/series_extended.json');
+    $return = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+
+    /** @var ApiClientInterface $clientMock */
+    $clientMock = mockApiClient()
+        ->shouldReceive('performAPICallWithJsonResponse')
+        ->once()
+        ->with(
+            'get',
+            'series/'.$seriesId.'/extended',
+        )
+        ->andReturn($return)
+        ->getMock();
+    $series = new Series($clientMock);
+    $result = $series->extended($seriesId);
+    $this->assertNotNull($result->id);
+    $this->assertNotNull($result->slug);
+    $this->assertNotNull($result->name);
+});

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Days85\Tvdb\DataParser;
 use Days85\Tvdb\Models\EpisodeBaseRecord;
 use Days85\Tvdb\Models\SeriesBaseRecord;
+use Days85\Tvdb\Models\SeriesExtendedRecord;
 use InvalidArgumentException;
 
 class Series extends AbstractResource
@@ -45,6 +46,14 @@ class Series extends AbstractResource
             ->performAPICallWithJsonResponse('get', 'series/'.$id);
 
         return DataParser::parseData($json, SeriesBaseRecord::class);
+    }
+
+    public function extended(int $id): SeriesExtendedRecord
+    {
+        $json = $this->parent
+            ->performAPICallWithJsonResponse('get', 'series/'.$id.'/extended');
+
+        return DataParser::parseData($json, SeriesExtendedRecord::class);
     }
 
     /**
