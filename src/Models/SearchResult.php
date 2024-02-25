@@ -69,7 +69,7 @@ class SearchResult
     public string $primary_language;
 
     /**
-     * @var RemoteId[]
+     * @var RemoteID[]
      */
     public array $remote_ids;
 

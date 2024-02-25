@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Days85\Tvdb\Models;
 
-class RemoteId
+class RemoteID
 {
     public string $id;
 
