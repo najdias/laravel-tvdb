@@ -9,9 +9,9 @@ class Company
     public ?string $activeDate;
 
     /**
-     * @var Alias[]
+     * @var Alias[]|null
      */
-    public array $aliases;
+    public ?array $aliases;
 
     public ?string $country;
 

@@ -11,6 +11,7 @@ use Days85\Tvdb\Models\Links;
 use Days85\Tvdb\Resources\Authentication;
 use Days85\Tvdb\Resources\ResourceFactory;
 use Days85\Tvdb\Resources\Search;
+use Days85\Tvdb\Resources\Seasons;
 use Days85\Tvdb\Resources\Series;
 use Exception;
 use GuzzleHttp\Client;
@@ -67,6 +68,11 @@ class ApiClient implements ApiClientInterface
     public function series(): Series
     {
         return ResourceFactory::getResourceInstance($this, Series::class);
+    }
+
+    public function seasons(): Seasons
+    {
+        return ResourceFactory::getResourceInstance($this, Seasons::class);
     }
 
     public function requestHeaders(string $method, string $path, array $options = []): array

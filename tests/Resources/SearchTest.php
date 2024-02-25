@@ -24,17 +24,17 @@ function setApiClientMockSearchData(
 
 it('searches by name', function () {
     $name = 'foo';
-    $return = [
-        ['id' => '1', 'name' => 'foo', 'tvdb_id' => 'tt123'],
-        ['id' => '2', 'name' => 'bar', 'tvdb_id' => 'tt456'],
-    ];
-    $options = ['query' => ['query' => $name]];
+    $json = file_get_contents(__DIR__.'/../Data/search.json');
+    $return = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+    $options = ['query' => ['query' => $name, 'type' => 'series']];
+    $optionalParameters = ['type' => 'series'];
 
     $clientMock = setApiClientMockSearchData($return, $options);
 
     $resource = new Search($clientMock);
-    $results = $resource->search($name);
+    $results = $resource->search($name, $optionalParameters);
     $this->assertContainsOnlyInstancesOf(SearchResult::class, $results);
+
     foreach ($results as $key => $result) {
         $this->assertEquals($return[$key]['id'], $result->id);
         $this->assertEquals($return[$key]['name'], $result->name);

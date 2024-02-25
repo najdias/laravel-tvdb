@@ -6,6 +6,8 @@ use Days85\Tvdb\Exceptions\ResourceNotFoundException;
 use Days85\Tvdb\Exceptions\UnauthorizedException;
 use Days85\Tvdb\Resources\Authentication;
 use Days85\Tvdb\Resources\Search;
+use Days85\Tvdb\Resources\Seasons;
+use Days85\Tvdb\Resources\Series;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
@@ -41,6 +43,8 @@ test('resource instance types', function () {
 
     $this->assertInstanceOf(Authentication::class, $client->authentication());
     $this->assertInstanceOf(Search::class, $client->search());
+    $this->assertInstanceOf(Series::class, $client->series());
+    $this->assertInstanceOf(Seasons::class, $client->seasons());
 });
 
 test('if headers are returned', function () {

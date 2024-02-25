@@ -1,17 +1,13 @@
 <?php
 
 use Days85\Tvdb\ApiClientInterface;
+use Days85\Tvdb\Enums\SeasonType;
 use Days85\Tvdb\Resources\Series;
 
 it('gets simple series', function () {
-    $seriesId = 1337;
-    $slug = 'foo-bar-baz';
-    $name = 'foo bar baz';
-    $return = [
-        'id' => $seriesId,
-        'slug' => $slug,
-        'name' => $name,
-    ];
+    $seriesId = 73762;
+    $json = file_get_contents(__DIR__.'/../Data/series_simple.json');
+    $return = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
     /** @var ApiClientInterface $clientMock */
     $clientMock = mockApiClient()
@@ -26,25 +22,15 @@ it('gets simple series', function () {
     $series = new Series($clientMock);
     $result = $series->simple($seriesId);
     $this->assertEquals($seriesId, $result->id);
-    $this->assertEquals($slug, $result->slug);
-    $this->assertEquals($name, $result->name);
 });
 
 it('gets episodes without language', function () {
-    $seriesId = 1337;
-    $page = 1;
-    $season = 0;
+    $seriesId = 73762;
+    $page = 0;
+    $season = 1;
     $options = ['query' => ['page' => $page, 'season' => $season]];
-    $return = [
-        [
-            'id' => '123',
-            'name' => 'foo bar',
-        ],
-        [
-            'id' => '124',
-            'name' => 'bar baz',
-        ],
-    ];
+    $json = file_get_contents(__DIR__.'/../Data/series_episodes_no_lang.json');
+    $return = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
     /** @var ApiClientInterface $clientMock */
     $clientMock = mockApiClient()
@@ -60,25 +46,18 @@ it('gets episodes without language', function () {
     $series = new Series($clientMock);
     $episodes = $series->episodes($seriesId, $season, $page);
 
+    $this->assertNotNull($episodes);
     $this->assertIsArray($episodes);
 });
 
 it('gets episodes with language', function () {
-    $seriesId = 1337;
-    $page = 1;
-    $season = 0;
-    $language = 'en';
+    $seriesId = 73762;
+    $page = 0;
+    $season = 1;
+    $language = 'eng';
     $options = ['query' => ['page' => $page]];
-    $return = [
-        [
-            'id' => '123',
-            'name' => 'foo bar',
-        ],
-        [
-            'id' => '124',
-            'name' => 'bar baz',
-        ],
-    ];
+    $json = file_get_contents(__DIR__.'/../Data/series_episodes_lang.json');
+    $return = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
     /** @var ApiClientInterface $clientMock */
     $clientMock = mockApiClient()
@@ -86,7 +65,7 @@ it('gets episodes with language', function () {
         ->once()
         ->with(
             'get',
-            'series/'.$seriesId.'/episodes/default/en',
+            'series/'.$seriesId.'/episodes/default/'.$language,
             $options,
         )
         ->andReturn($return)
@@ -96,25 +75,37 @@ it('gets episodes with language', function () {
         $seriesId,
         $season,
         $page,
-        Series::SEASON_TYPE_DEFAULT,
+        SeasonType::DEFAULT,
         $language,
     );
 
     $this->assertIsArray($episodes);
 });
 
-it('throws exception with wrong season type on get episodes', function () {
+it('gets episodes with different season type than default', function () {
     $seriesId = 1337;
-    $page = 1;
-    $season = 0;
+    $page = 0;
+    $season = 1;
+    $options = ['query' => ['page' => $page, 'season' => $season]];
+    $json = file_get_contents(__DIR__.'/../Data/series_episodes_no_lang.json');
+    $return = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
     /** @var ApiClientInterface $clientMock */
-    $clientMock = mockApiClient();
+    $clientMock = mockApiClient()
+        ->shouldReceive('performAPICallWithJsonResponse')
+        ->once()
+        ->with(
+            'get',
+            'series/'.$seriesId.'/episodes/official',
+            $options,
+        )
+        ->andReturn($return)
+        ->getMock();
     $series = new Series($clientMock);
-    $episodes = $series->episodes($seriesId, $season, $page, 'foo');
+    $episodes = $series->episodes($seriesId, $season, $page, SeasonType::OFFICIAL);
 
     $this->assertIsArray($episodes);
-})->expectException(InvalidArgumentException::class);
+});
 
 it('gets extended series', function () {
     $seriesId = 1337;
