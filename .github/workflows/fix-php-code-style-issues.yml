@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - '**.php'
+  pull_request:
+    types: [ opened, reopened ]
+  workflow_dispatch:
 
 permissions:
   contents: write

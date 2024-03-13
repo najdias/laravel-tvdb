@@ -10,6 +10,9 @@ on:
     paths:
       - '**.php'
       - '.github/workflows/psalm.yml'
+  pull_request:
+    types: [ opened, reopened ]
+  workflow_dispatch:
 
 permissions:
   contents: read
